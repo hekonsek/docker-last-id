@@ -1,3 +1,5 @@
 FROM hekonsek/dkr-docker-go
-RUN go get -u github.com/hekonsek/docker-last-id
-ENTRYPOINT ["/root/go/bin/docker-last-id", "--dockerized"]
+RUN adduser --disabled-password --gecos "" --force-badname --ingroup docker --uid 500 redhatuser
+RUN adduser --disabled-password --gecos "" --force-badname --ingroup docker --uid 1000 nonredhatuser
+ADD docker-last-id /usr/bin/
+ENTRYPOINT ["/usr/bin/docker-last-id"]
